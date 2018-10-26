@@ -1,0 +1,14 @@
+<ucd.deployables>
+<deployables>
+<was.War name="TestApp">
+<tag>applicationSpecific</tag>
+    <classloader>PARENT FIRST</classloader>
+    <context>/test</context>
+</was.War>
+<was.OracleDS>
+    <tag>DSsetting</tag>
+    <datasourceName>testDS</datasourceName>
+    <url>test.db:1234</url>
+</was.OracleDS>
+</deployables>
+</ucd.deployables>
