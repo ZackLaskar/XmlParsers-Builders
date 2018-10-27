@@ -11,7 +11,7 @@ https://coderanch.com/t/471377/languages/generate-XML-MAP
 https://stackoverflow.com/questions/48709822/dynamically-generate-xml-with-attributes-and-child-nodes-from-map-in-groovy
  */
 doc = new XmlSlurper().parse("/Users/Muzakkir/IdeaProjects/XmlParsers-Builders/src/samp/files/test.xml")
-
+def list = []
 doc.deployables.each { thing ->
     thing.children().each { tag ->
         println "---------------------"
@@ -25,6 +25,14 @@ doc.deployables.each { thing ->
             map1[ "${child.name()}" ] = [ "${child.text()}" ]
         }
         println(map1)
+        list << map1
     }
 }
 
+println list
+
+/*
+Groovy > Nested Map to Xml
+https://stackoverflow.com/questions/30997222/groovy-nested-map-to-xml
+
+*/
