@@ -1,14 +1,25 @@
 <ucd.deployables>
 <deployables>
-<was.War name="TestApp">
-<tag>applicationSpecific</tag>
+<was.War name="TestApp" file="testAppfile">
+    <tag>applicationSpecific</tag>
     <classloader>PARENT FIRST</classloader>
     <context>/test</context>
 </was.War>
-<was.OracleDS>
-    <tag>DSsetting</tag>
-    <datasourceName>testDS</datasourceName>
-    <url>test.db:1234</url>
-</was.OracleDS>
+    <was.OracleDS>
+        <tag>DSsetting</tag>
+        <datasourceName>testDS</datasourceName>
+        <url>test.db:1234</url>
+        <jaas>{{JAAS name}}</jaas>
+    </was.OracleDS>
+    <was.OracleJDBC>
+        <name>testJDBc</name>
+        <driverpath>testDS</driverpath>
+        <classNAme>test.db:1234</classNAme>
+    </was.OracleJDBC>
+    <was.jvm>
+        <minHeap>{{min Heap size}}</minHeap>
+        <maxHeap>{{max Heap size}}</maxHeap>
+        <args>{{generice jvm args}}</args>
+    </was.jvm>
 </deployables>
 </ucd.deployables>

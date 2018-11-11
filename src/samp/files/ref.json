@@ -1,0 +1,26 @@
+{
+  "UCDxml": {
+    "was.jvm":{
+      "minHeap":"jvmminHeap",
+      "maxHeap":"jvmmaxHeap",
+      "args":"jvmgenericArgs",
+    },
+    "was.OracleDS":{
+      "tag":"DSsetting",
+      "datasourceName":"wasDataSourceNAme",
+      "url":"wasDataSourceURL",
+      "jaas":"wasJaasName"
+    },
+    "was.OracleJDBC":{
+      "tag":"jdbcSetting",
+      "name":"jdbcName",
+      "driverpath":"jdbcDriverPath",
+      "classNAme":"implementationClassName"
+    },
+    "was.War":{
+      "tag":"ApplicationSetting",
+      "classloader":"appClassLoader",
+      "context":"appContextroot"
+    }
+  }
+  }
