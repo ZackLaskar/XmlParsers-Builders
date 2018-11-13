@@ -5,6 +5,8 @@ def command = response.deployables.'cmd.Command'.each{ node ->
         println node.commandLine.text()
         cmd = node.commandLine.text()
         excecuteShell( "$cmd", "Directory creation"  )
+        dir = node.commandLine.text().split()[-1]
+        println "direcorty $dir"
         //println System.getProperty("user.dir")
     }
 }
