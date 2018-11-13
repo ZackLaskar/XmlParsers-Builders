@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<udm.DeploymentPackage version="${projectVersion}" application="${xlDeployApplication}" orchestrator="parallel-by-container">
+    <deployables>
+        <cmd.Command name="create-log-folder-if-non-existent">
+            <commandLine1>mkdir -p {{APP_LOGS_FOLDER}}</commandLine1>
+            <commandLine>mkdir -p /Users/Muzakkir/Test/test1</commandLine>
+            <runUndoCommandOnUpgrade>false</runUndoCommandOnUpgrade>
+            <order>1</order>
+            <tags>
+                <value>containerless</value>
+            </tags>
+        </cmd.Command>
+        <cmd.Command name="create-app-folder-if-non-existent">
+            <commandLine>mkdir -p {{APP_JAR_FOLDER}}</commandLine>
+            <UndoCommandLine>rm -r {{APP_JAR_FOLDER}}</UndoCommandLine>
+            <runUndoCommandOnUpgrade>rm -r {{APP_JAR_FOLDER}}</runUndoCommandOnUpgrade>
+            <order>1</order>
+            <undoOrder>95</undoOrder>
+            <tags>
+                <value>containerless</value>
+            </tags>
+        </cmd.Command>
+        <cmd.Command name="setup-correct-rights-${{projectVersion}}">
+            <commandLine>chmod -R 704 {{APP_JAR_FOLDER}}</commandLine>
+            <UndoCommandLine>chmod -R {{APP_JAR_FOLDER}}</UndoCommandLine>
+            <runUndoCommandOnUpgrade>true</runUndoCommandOnUpgrade>
+            <order>85</order>
+            <undoOrder>15</undoOrder>
+            <tags>
+                <value>containerless</value>
+            </tags>
+        </cmd.Command>
+        <cmd.Command name="setup-${projectVersion}">
+            <commandLine>{{APP_JAR_FOLDER}}/setup-aix.sh.conf</commandLine>
+            <UndoCommandLine>{{APP_JAR_FOLDER}}/unsetup.aix.sh.conf</UndoCommandLine>
+            <runUndoCommandOnUpgrade>true</runUndoCommandOnUpgrade>
+            <order>95</order>
+            <undoOrder>20</undoOrder>
+            <tags>
+                <value>containerless</value>
+            </tags>
+        </cmd.Command>
+        <file.Folder name="start-stop-scripts-${projectVersion}" file="classes/scripts">
+            <targetPathShared>true</targetPathShared>
+            <targetPath>{{APP_JAR_FOLDER}}</targetPath>
+            <createTargetPath>true</createTargetPath>
+            <scanPlaceholders>true</scanPlaceholders>
+            <tags>
+                <value>containerless</value>
+            </tags>
+        </file.Folder>
+        <file.Archive name="${jarName}.jar" file="${jarName}.jar">
+            <targetPathShared>false</targetPathShared>
+            <targetPath>{{APP_JAR_FOLDER}}</targetPath>
+            <createTargetPath>true</createTargetPath>
+            <delimiter>{{}}</delimiter>
+            <textFileNamesRegex>.*(yaml|yml|xml|properties)</textFileNamesRegex>
+            <tags>
+                <value>containerless</value>
+            </tags>
+        </file.Archive>
+    </deployables>
+</udm.DeploymentPackage>
