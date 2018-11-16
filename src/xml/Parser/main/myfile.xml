@@ -1,0 +1,23 @@
+<JVMSettings>
+<was.War>
+<ApplicationSetting>applicationSpecific</ApplicationSetting>
+<appClassLoader>PARENT FIRST</appClassLoader>
+<appContextroot>/test</appContextroot>
+</was.War>
+<was.OracleDS>
+<DSsetting>DSsetting</DSsetting>
+<wasDataSourceNAme>testDS</wasDataSourceNAme>
+<wasDataSourceURL>test.db:1234</wasDataSourceURL>
+<wasJaasName>{{JAAS name}}</wasJaasName>
+</was.OracleDS>
+<was.OracleJDBC>
+<jdbcName>testJDBc</jdbcName>
+<jdbcDriverPath>testDS</jdbcDriverPath>
+<implementationClassName>test.db:1234</implementationClassName>
+</was.OracleJDBC>
+<was.jvm>
+<jvmminHeap>{{min Heap size}}</jvmminHeap>
+<jvmmaxHeap>{{max Heap size}}</jvmmaxHeap>
+<jvmgenericArgs>{{generice jvm args}}</jvmgenericArgs>
+</was.jvm>
+</JVMSettings>

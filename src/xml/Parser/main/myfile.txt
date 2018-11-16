@@ -1,0 +1,8 @@
+<was.War>
+</was.War>
+<was.OracleDS>
+</was.OracleDS>
+<was.OracleJDBC>
+</was.OracleJDBC>
+<was.jvm>
+</was.jvm>

@@ -14,17 +14,19 @@ https://stackoverflow.com/questions/48709822/dynamically-generate-xml-with-attri
 //working snippet start
 doc = new XmlSlurper().parse("/Users/Muzakkir/IdeaProjects/XmlParsers-Builders/src/samp/files/test.xml")
 def list = []
+writer("<JVMSettings>")
 doc.deployables.each { thing ->
     thing.children().each { tag ->
-        println "---------------------"
+        //println "---------------------"
         //println "${tag.name()}"
         map1 = "${tag.name()}"
-        println map1
-        def map1 = [:]
-        println "---------------------"
+        println "<$map1>"
+        writer("<$map1>")
+        //def map1 = [:]
+        //println "---------------------"
         tag.children().each { child ->
             //println "  ${child.name()}: ${child.text()}"
-            map1[ "${child.name()}" ] = "${child.text()}"
+            //map1[ "${child.name()}" ] = "${child.text()}"
            // println "Param2: ${tag.name()}"
            // println "Param3: ${child.name()}"
 
@@ -32,14 +34,17 @@ doc.deployables.each { thing ->
            if (getSpeckey("UCDxml", "${tag.name()}", "${child.name()}" )){
                 //println "key found in json : "
                newkeyFromJson = getSpeckey("UCDxml", "${tag.name()}", "${child.name()}" )
-               xmlCreator("$newkeyFromJson", "${child.text()}")
+               xmlline = xmlCreator("$newkeyFromJson", "${child.text()}")
+               writer("$xmlline")
            }
         }
+        println "</$map1>"
+        writer("</$map1>")
         //println(map1)
         //list << map1
     }
 }
-
+writer("</JVMSettings>")
 //println list
 
 /*
@@ -77,6 +82,14 @@ def xmlCreator(element, value){
     def xmlMarkup = new MarkupBuilder(xmlWriter)
      xmlMarkup."$element"("$value")
     println xmlWriter.toString()
+    String xmlline = xmlWriter.toString()
+    return xmlline
 }
 
 //xmlCreator('UCDxml', 'test1')
+def writer( line ) {
+File greetingsFile = new File("myfile.xml")
+greetingsFile.withWriterAppend{ out ->
+    out.println "$line"
+}
+}
